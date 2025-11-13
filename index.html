@@ -24,7 +24,7 @@
   <script>
     async function fetchUsers() {
       try {
-        const res = await fetch('http://localhost:5000/users');
+        const res = await fetch('https://backend-w1ps.onrender.com/users');
         const users = await res.json();
 
         const tbody = document.getElementById('users-body');
@@ -55,3 +55,4 @@
   </script>
 </body>
 </html>
+
