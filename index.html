@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leak</title>
+</head>
+<body>
+  <h1>Admin - Users Table</h1>
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody id="users-body">
+      <tr>
+        <td colspan="3">Loading...</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    async function fetchUsers() {
+      try {
+        const res = await fetch('http://localhost:5000/users');
+        const users = await res.json();
+
+        const tbody = document.getElementById('users-body');
+        tbody.innerHTML = '';
+
+        if (users.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3">No users found</td></tr>';
+          return;
+        }
+
+        users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.password}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error(err);
+        document.getElementById('users-body').innerHTML =
+          '<tr><td colspan="3">Error loading users</td></tr>';
+      }
+    }
+
+    fetchUsers();
+  </script>
+</body>
+</html>
