@@ -24,7 +24,7 @@
   <script>
     async function fetchUsers() {
       try {
-        const res = await fetch('https://backend-wvgi.onrender.com');
+        const res = await fetch('https://backend-wvgi.onrender.com/users');
         const users = await res.json();
 
         const tbody = document.getElementById('users-body');
@@ -55,5 +55,6 @@
   </script>
 </body>
 </html>
+
 
 
